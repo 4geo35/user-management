@@ -1,0 +1,30 @@
+{
+    "name": "aweram/user-management",
+    "description": "Interface for manage users",
+    "type": "library",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir Peshkov",
+            "email": "vladimirpeshkov5@gmail.com"
+        }
+    ],
+    "require": {
+        "aweram/tailwindcss-theme": "^2.0",
+        "laravel/fortify": "^1.18",
+        "ext-fileinfo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aweram\\UserManagement\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Aweram\\UserManagement\\UserManagementServiceProvider"
+            ]
+        }
+    }
+}
