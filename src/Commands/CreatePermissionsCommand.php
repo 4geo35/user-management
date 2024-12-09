@@ -2,7 +2,7 @@
 
 namespace GIS\UserManagement\Commands;
 
-use Aweram\UserManagement\Models\Permission;
+use GIS\UserManagement\Models\Permission;
 use Illuminate\Console\Command;
 
 class CreatePermissionsCommand extends Command
