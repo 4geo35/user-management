@@ -1,11 +1,11 @@
 <?php
 
-namespace Aweram\UserManagement\Policies;
+namespace GIS\UserManagement\Policies;
 
 use App\Models\User;
-use Aweram\UserManagement\Facades\PermissionActions;
-use Aweram\UserManagement\Interfaces\PolicyPermissionInterface;
-use Aweram\UserManagement\Models\Role;
+use GIS\UserManagement\Facades\PermissionActions;
+use GIS\UserManagement\Interfaces\PolicyPermissionInterface;
+use GIS\UserManagement\Models\Role;
 
 class RolePolicy implements PolicyPermissionInterface
 {

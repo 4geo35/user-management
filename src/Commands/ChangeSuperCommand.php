@@ -1,6 +1,6 @@
 <?php
 
-namespace Aweram\UserManagement\Commands;
+namespace GIS\UserManagement\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;

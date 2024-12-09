@@ -1,11 +1,10 @@
 <?php
 
-namespace Aweram\UserManagement\Livewire;
+namespace GIS\UserManagement\Livewire;
 
-use Aweram\UserManagement\Facades\PermissionActions;
-use Aweram\UserManagement\Models\Permission;
-use Aweram\UserManagement\Models\Role;
-use Illuminate\Database\Eloquent\Collection;
+use GIS\UserManagement\Facades\PermissionActions;
+use GIS\UserManagement\Models\Permission;
+use GIS\UserManagement\Models\Role;
 use Livewire\Component;
 use Livewire\WithPagination;
 

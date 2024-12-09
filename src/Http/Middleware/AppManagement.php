@@ -1,6 +1,6 @@
 <?php
 
-namespace Aweram\UserManagement\Http\Middleware;
+namespace GIS\UserManagement\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\RedirectResponse;

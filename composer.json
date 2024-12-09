@@ -1,5 +1,5 @@
 {
-    "name": "aweram/user-management",
+    "name": "4geo35/user-management",
     "description": "Interface for manage users",
     "type": "library",
     "minimum-stability": "dev",
@@ -7,23 +7,23 @@
     "authors": [
         {
             "name": "Vladimir Peshkov",
-            "email": "vladimirpeshkov5@gmail.com"
+            "email": "aweram-team@yandex.ru"
         }
     ],
     "require": {
-        "aweram/tailwindcss-theme": "^2.0",
-        "laravel/fortify": "^1.18",
+        "4geo35/tailwindcss-theme": "@dev",
+        "laravel/fortify": "^1.25",
         "ext-fileinfo": "*"
     },
     "autoload": {
         "psr-4": {
-            "Aweram\\UserManagement\\": "src/"
+            "GIS\\UserManagement\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Aweram\\UserManagement\\UserManagementServiceProvider"
+                "GIS\\UserManagement\\UserManagementServiceProvider"
             ]
         }
     }

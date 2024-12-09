@@ -1,6 +1,6 @@
 <?php
 
-namespace Aweram\UserManagement\Interfaces;
+namespace GIS\UserManagement\Interfaces;
 
 interface PolicyPermissionInterface
 {

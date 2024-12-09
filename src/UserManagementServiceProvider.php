@@ -1,19 +1,18 @@
 <?php
 
-namespace Aweram\UserManagement;
+namespace GIS\UserManagement;
 
 use App\Models\User;
-use Aweram\UserManagement\Commands\ChangeSuperCommand;
-use Aweram\UserManagement\Commands\CreatePermissionsCommand;
-use Aweram\UserManagement\Facades\PermissionActions;
-use Aweram\UserManagement\Helpers\PermissionActionsManager;
-use Aweram\UserManagement\Http\Middleware\AppManagement;
-use Aweram\UserManagement\Http\Middleware\SuperUser;
-use Aweram\UserManagement\Livewire\RoleIndexWire;
-use Aweram\UserManagement\Livewire\UserIndexWire;
-use Aweram\UserManagement\Models\Role;
-use Aweram\UserManagement\Observers\UserObserver;
-use Aweram\UserManagement\Policies\UserPolicy;
+use GIS\UserManagement\Commands\ChangeSuperCommand;
+use GIS\UserManagement\Commands\CreatePermissionsCommand;
+use GIS\UserManagement\Facades\PermissionActions;
+use GIS\UserManagement\Helpers\PermissionActionsManager;
+use GIS\UserManagement\Http\Middleware\AppManagement;
+use GIS\UserManagement\Http\Middleware\SuperUser;
+use GIS\UserManagement\Livewire\RoleIndexWire;
+use GIS\UserManagement\Livewire\UserIndexWire;
+use GIS\UserManagement\Models\Role;
+use GIS\UserManagement\Observers\UserObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;

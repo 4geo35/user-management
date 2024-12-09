@@ -1,10 +1,10 @@
 <?php
 
-namespace Aweram\UserManagement\Helpers;
+namespace GIS\UserManagement\Helpers;
 
 use App\Models\User;
-use Aweram\UserManagement\Models\Permission;
-use Aweram\UserManagement\Models\Role;
+use GIS\UserManagement\Models\Permission;
+use GIS\UserManagement\Models\Role;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 

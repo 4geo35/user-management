@@ -1,8 +1,8 @@
 <?php
 
-namespace Aweram\UserManagement\Traits;
+namespace GIS\UserManagement\Traits;
 
-use Aweram\UserManagement\Models\Role;
+use GIS\UserManagement\Models\Role;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait ShouldRole

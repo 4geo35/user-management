@@ -1,14 +1,13 @@
 <?php
 
-namespace Aweram\UserManagement\Livewire;
+namespace GIS\UserManagement\Livewire;
 
 use App\Models\User;
-use Aweram\UserManagement\Facades\PermissionActions;
-use Aweram\UserManagement\Models\Role;
+use GIS\UserManagement\Facades\PermissionActions;
+use GIS\UserManagement\Models\Role;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Component;

@@ -12,5 +12,5 @@ Route::middleware(["web", 'auth', "app-management"])
 
         Route::get(config("user-management.rolesUrl"), function () {
             return view("um::admin.roles");
-        })->name("roles")->middleware("can:viewAny,Aweram\UserManagement\Models\Role");
+        })->name("roles")->middleware("can:viewAny,GIS\UserManagement\Models\Role");
     });

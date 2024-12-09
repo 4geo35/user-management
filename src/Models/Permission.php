@@ -1,8 +1,8 @@
 <?php
 
-namespace Aweram\UserManagement\Models;
+namespace GIS\UserManagement\Models;
 
-use Aweram\UserManagement\Observers\PermissionObserver;
+use GIS\UserManagement\Observers\PermissionObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

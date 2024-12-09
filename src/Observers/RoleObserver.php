@@ -1,9 +1,9 @@
 <?php
 
-namespace Aweram\UserManagement\Observers;
+namespace GIS\UserManagement\Observers;
 
-use Aweram\UserManagement\Facades\PermissionActions;
-use Aweram\UserManagement\Models\Role;
+use GIS\UserManagement\Facades\PermissionActions;
+use GIS\UserManagement\Models\Role;
 
 class RoleObserver
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Aweram\UserManagement\Observers;
+namespace GIS\UserManagement\Observers;
 
 use App\Models\User;
-use Aweram\UserManagement\Facades\PermissionActions;
+use GIS\UserManagement\Facades\PermissionActions;
 
 class UserObserver
 {

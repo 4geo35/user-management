@@ -1,11 +1,11 @@
 <?php
 
-namespace Aweram\UserManagement\Facades;
+namespace GIS\UserManagement\Facades;
 
 use App\Models\User;
-use Aweram\UserManagement\Helpers\PermissionActionsManager;
-use Aweram\UserManagement\Models\Permission;
-use Aweram\UserManagement\Models\Role;
+use GIS\UserManagement\Helpers\PermissionActionsManager;
+use GIS\UserManagement\Models\Permission;
+use GIS\UserManagement\Models\Role;
 use Illuminate\Support\Facades\Facade;
 
 /**
