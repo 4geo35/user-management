@@ -123,6 +123,11 @@ class PermissionActionsManager
             $rights += $item;
         }
 
+        $this->setPermissionByRoleValue($role, $permission, $rights);
+    }
+
+    public function setPermissionByRoleValue(Role $role, Permission $permission, int $rights): void
+    {
         $exist = false;
         $role->load("permissions");
         foreach ($role->permissions as $item) {

@@ -25,6 +25,11 @@ class RolePolicy implements PolicyPermissionInterface
         ];
     }
 
+    public static function getDefaults(): int
+    {
+        return 0;
+    }
+
     public function viewAny(User $user): bool
     {
         return PermissionActions::allowedAction($user, self::PERMISSION_KEY, self::VIEW_ALL);

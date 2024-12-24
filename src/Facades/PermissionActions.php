@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @method static array getRightsListByRolePermission(Role $role, Permission $permission)
  * @method static void setPermissionByRoleRights(Role $role, Permission $permission, array $rightsList)
+ * @method static void setPermissionByRoleValue(Role $role, Permission $permission, int $rights)
  *
  * @see PermissionActionsManager
  */

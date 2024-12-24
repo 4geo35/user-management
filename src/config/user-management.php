@@ -17,4 +17,11 @@ return [
     "rolePolicyKey" => "roles",
 
     "permissions" => [],
+    "defaultRoles" => [
+        [
+            "name" => "editor",
+            "title" => "Редактор",
+            "management" => true,
+        ]
+    ],
 ];
