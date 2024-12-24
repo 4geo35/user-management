@@ -43,7 +43,7 @@ class CreatePermissionsCommand extends Command
                 ->where("key", $key)
                 ->first();
             if (! $permission) {
-                Permission::create($data);
+                $permission = Permission::create($data);
                 $this->info("Create permission {$data['title']} ({$data['key']})");
             } else {
                 /**
