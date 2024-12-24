@@ -4,6 +4,7 @@ namespace GIS\UserManagement\Livewire;
 
 use App\Models\User;
 use GIS\UserManagement\Facades\PermissionActions;
+use GIS\UserManagement\Models\LoginLink;
 use GIS\UserManagement\Models\Role;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
@@ -294,6 +295,38 @@ class UserIndexWire extends Component
 
         $this->resetPage();
         $this->closeDelete();
+    }
+
+    public function showLink(int $userId): void
+    {
+        $this->resetFields();
+        $this->userId = $userId;
+        $user = $this->findUser();
+        if (! $user) return;
+        $check = $this->checkAuth("link", $user);
+        if (! $check) return;
+
+        $link = LoginLink::create([
+            "email" => $user->email,
+        ]);
+        $url = route("auth.email-authenticate", ["token" => $link->id]);
+        session()->flash("success", "Link generated: {$url}");
+    }
+
+    public function sendLink(int $userId): void
+    {
+        $this->resetFields();
+        $this->userId = $userId;
+        $user = $this->findUser();
+        if (! $user) return;
+        $check = $this->checkAuth("link", $user);
+        if (! $check) return;
+
+        LoginLink::create([
+            "email" => $user->email,
+            "send" => $user->email,
+        ]);
+        session()->flash("success", "Link sent to user");
     }
 
     /**

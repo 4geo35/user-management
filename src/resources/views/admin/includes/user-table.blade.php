@@ -28,21 +28,36 @@
                     </ul>
                 </td>
                 <td>
-                    <div class="flex justify-center">
-                        <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none"
-                                @cannot("update", $item) disabled
-                                @else wire:loading.attr="disabled"
-                                @endcannot
-                                wire:click="showEdit({{ $item->id }})">
-                            <x-tt::ico.edit />
-                        </button>
-                        <button type="button" class="btn btn-danger px-btn-x-ico rounded-s-none"
-                                @can("delete", $item) @if ($item->id === Auth::id()) disabled @else wire:loading.attr="disabled" @endif
-                                @else disabled
-                                @endcan
-                                wire:click="showDelete({{ $item->id }})">
-                            <x-tt::ico.trash />
-                        </button>
+                    <div class="flex items-center justify-center space-x-indent-half">
+                        <div class="flex items-center justify-center">
+                            <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none"
+                                    @cannot("update", $item) disabled
+                                    @else wire:loading.attr="disabled"
+                                    @endcannot
+                                    wire:click="showEdit({{ $item->id }})">
+                                <x-tt::ico.edit />
+                            </button>
+                            <button type="button" class="btn btn-danger px-btn-x-ico rounded-s-none"
+                                    @can("delete", $item) @if ($item->id === Auth::id()) disabled @else wire:loading.attr="disabled" @endif
+                                    @else disabled
+                                    @endcan
+                                    wire:click="showDelete({{ $item->id }})">
+                                <x-tt::ico.trash />
+                            </button>
+                        </div>
+
+                        @can("link", $item)
+                            <div class="flex items-center justify-center">
+                                <button type="button" class="btn btn-outline-primary px-btn-x-ico rounded-e-none"
+                                        wire:loading.attr="disabled" wire:click="showLink({{ $item->id }})">
+                                    <x-um::ico.share />
+                                </button>
+                                <button type="button" class="btn btn-outline-success px-btn-x-ico rounded-s-none"
+                                        wire:loading.attr="disabled" wire:click="sendLink({{ $item->id }})">
+                                    <x-um::ico.attach-email />
+                                </button>
+                            </div>
+                        @endcan
                     </div>
                 </td>
             </tr>

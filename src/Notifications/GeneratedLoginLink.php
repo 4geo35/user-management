@@ -4,10 +4,11 @@ namespace GIS\UserManagement\Notifications;
 
 use GIS\UserManagement\Models\LoginLink;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class GeneratedLoginLink extends Notification
+class GeneratedLoginLink extends Notification implements ShouldQueue
 {
     use Queueable;
 

@@ -13,6 +13,7 @@ class UserPolicy implements PolicyPermissionInterface
     const CREATE = 4;
     const UPDATE = 8;
     const DELETE = 16;
+    const LINK = 32;
 
     public static function getPermissions(): array
     {
@@ -20,7 +21,8 @@ class UserPolicy implements PolicyPermissionInterface
             self::VIEW_ALL => __("View all"),
             self::CREATE => __("Creating"),
             self::UPDATE => __("Updating"),
-            self::DELETE => __("Deleting")
+            self::DELETE => __("Deleting"),
+            self::LINK => __("Login link"),
         ];
     }
 
@@ -49,5 +51,11 @@ class UserPolicy implements PolicyPermissionInterface
     {
         if ($model->super) return false;
         return PermissionActions::allowedAction($user, self::PERMISSION_KEY, self::DELETE);
+    }
+
+    public function link(User $user, User $model): bool
+    {
+        if ($model->super) return false;
+        return PermissionActions::allowedAction($user, self::PERMISSION_KEY, self::LINK);
     }
 }
