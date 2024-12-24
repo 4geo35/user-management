@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "4geo35/tailwindcss-theme": "^1.0",
+        "4geo35/tailwindcss-theme": "@dev",
         "laravel/fortify": "^1.25",
         "ext-fileinfo": "*"
     },

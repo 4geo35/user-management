@@ -5,7 +5,9 @@ namespace GIS\UserManagement;
 use App\Models\User;
 use GIS\UserManagement\Commands\ChangeSuperCommand;
 use GIS\UserManagement\Commands\CreatePermissionsCommand;
+use GIS\UserManagement\Commands\GenerateLoginLink;
 use GIS\UserManagement\Facades\PermissionActions;
+use GIS\UserManagement\Helpers\LoginLinkActionsManager;
 use GIS\UserManagement\Helpers\PermissionActionsManager;
 use GIS\UserManagement\Http\Middleware\AppManagement;
 use GIS\UserManagement\Http\Middleware\SuperUser;
@@ -75,6 +77,7 @@ class UserManagementServiceProvider extends ServiceProvider
 
         // Подключение routes
         $this->loadRoutesFrom(__DIR__ . "/routes/admin.php");
+        $this->loadRoutesFrom(__DIR__ . "/routes/auth.php");
 
         // Подключение переводов
         $this->loadJsonTranslationsFrom(__DIR__ . "/lang");
@@ -83,12 +86,16 @@ class UserManagementServiceProvider extends ServiceProvider
         $this->app->singleton("permission-actions", function () {
             return new PermissionActionsManager;
         });
+        $this->app->singleton("login-link-actions", function () {
+            return new LoginLinkActionsManager;
+        });
 
         // Commands.
         if ($this->app->runningInConsole()) {
             $this->commands([
                 CreatePermissionsCommand::class,
                 ChangeSuperCommand::class,
+                GenerateLoginLink::class,
             ]);
         }
     }
