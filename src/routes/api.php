@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use GIS\UserManagement\Http\Controllers\UserController;
 
 Route::middleware(["auth:api", "super-user"])
     ->prefix("api")
-    ->as("api.")
+    ->as("api.users.")
     ->group(function () {
         Route::get("user", function () {
             $user = \Illuminate\Support\Facades\Auth::user();
@@ -15,4 +16,7 @@ Route::middleware(["auth:api", "super-user"])
                     "email" => $user->email,
                 ]);
         })->name("user");
+
+        Route::get("/auth/{email}/send-link", [UserController::class, "sendLoginLinkForCurrentUserTo"])
+            ->name("get-current-link");
     });

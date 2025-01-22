@@ -5,6 +5,7 @@ namespace GIS\UserManagement\Commands;
 use App\Models\User;
 use GIS\UserManagement\Models\LoginLink;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class GenerateLoginLink extends Command
 {
@@ -29,7 +30,7 @@ class GenerateLoginLink extends Command
     {
         $email = $this->argument("email");
         $send = $this->option("send");
-        if ($this->hasOption("get")) $send = null;
+        if ($this->option("get")) $send = null;
         elseif (empty($send)) $send = $email;
 
         $user = User::query()

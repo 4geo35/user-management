@@ -98,6 +98,10 @@ class UserManagementServiceProvider extends ServiceProvider
                 ChangeSuperCommand::class,
                 GenerateLoginLink::class,
             ]);
+        } else {
+            $this->commands([
+                GenerateLoginLink::class,
+            ]);
         }
     }
 
