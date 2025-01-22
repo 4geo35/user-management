@@ -4,11 +4,17 @@
         <input type="text" aria-label="E-mail" placeholder="E-mail" id="email" class="form-control" wire:model.live="searchEmail">
         <button type="button" class="btn btn-outline-primary" wire:click="clearSearch">{{ __("Clear") }}</button>
     </div>
-    <div>
+    <div class="flex flex-col space-y-indent-half md:flex-row md:space-y-0">
         <button type="button" class="btn btn-primary px-btn-x-ico lg:px-btn-x ml-indent-half"
                 wire:click="showCreate">
             <x-tt::ico.circle-plus />
             <span class="hidden lg:inline-block pl-btn-ico-text">{{ __("Add") }}</span>
         </button>
+        @if (\Illuminate\Support\Facades\Gate::check("super-user"))
+            <button type="button" class="btn btn-outline-primary ml-indent-half"
+                    wire:click="makeApiToken" wire:loading.attr="disabled">
+                Token
+            </button>
+        @endif
     </div>
 </div>

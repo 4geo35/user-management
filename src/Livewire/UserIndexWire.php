@@ -9,6 +9,7 @@ use GIS\UserManagement\Models\Role;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -91,6 +92,19 @@ class UserIndexWire extends Component
         return view("um::livewire.admin.users", [
             "users" => $query->paginate(),
         ]);
+    }
+
+    public function makeApiToken(): void
+    {
+        if (!Gate::check("super-user")) {
+            session()->flash("error", __("Unauthorized action"));
+            return;
+        }
+        $user = Auth::user();
+        $token = Str::random(60);
+        $user->api_token = $token;
+        $user->save();
+        session()->flash("success", $token);
     }
 
     /**

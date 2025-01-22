@@ -22,6 +22,14 @@
 
 Создать права доступа из конфигурации `php artisan um:permissions`
 
+Добавить в `auth.php` в `guards`, что бы работал токен авторизации:
+
+    "api" => [
+            "driver" => "token",
+            "provider" => "users",
+            "storage_key" => "api_token",
+        ]
+
 ### Команды
 
 `php artisan um:super {--id=} {--email}` - меняет статус супер пользователя для выбранного (по id или email)
