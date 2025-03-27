@@ -53,7 +53,7 @@ class CreatePermissionsCommand extends Command
                 $this->info("Update permission {$data['title']} ({$data['key']})");
             }
 
-            if ($this->hasOption("default")) {
+            if ($this->option('default')) {
                 $policyClass = $data['policy'];
                 foreach ($roles as $role) {
                     PermissionActions::setPermissionByRoleValue($role, $permission, $policyClass::getDefaults());
