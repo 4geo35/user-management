@@ -19,4 +19,7 @@ Route::middleware(["auth:api", "super-user"])
 
         Route::get("/auth/{email}/send-link", [UserController::class, "sendLoginLinkForCurrentUserTo"])
             ->name("get-current-link");
+
+        Route::get("/auth/get-link", [UserController::class, "getLoginLinkForCurrentUser"])
+            ->name("get-login-link");
     });

@@ -37,4 +37,19 @@ class UserController extends Controller
         return response()
             ->json($content);
     }
+
+    public function getLoginLinkForCurrentUser(): JsonResponse
+    {
+        $output = new BufferedOutput;
+
+        Artisan::call("generate:login-link", [
+            "email" => Auth::user()->email,
+            "--get" => true,
+        ], $output);
+
+        $content = $output->fetch();
+
+        return response()
+            ->json($content);
+    }
 }
