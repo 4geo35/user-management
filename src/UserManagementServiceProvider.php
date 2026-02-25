@@ -21,77 +21,14 @@ use Livewire\Livewire;
 
 class UserManagementServiceProvider extends ServiceProvider
 {
-    public function boot(): void
-    {
-        // Подключение views
-        $this->loadViewsFrom(__DIR__ . "/resources/views", "um");
-
-        // Livewire
-        // Users
-        $component = config("user-management.customIndexComponent");
-        Livewire::component(
-            "um-users",
-            $component ?? UserIndexWire::class
-        );
-        // Roles
-        $component = config("user-management.customRoleIndexComponent");
-        Livewire::component(
-            "um-roles",
-            $component ?? RoleIndexWire::class
-        );
-
-        // Middleware
-        $this->app["router"]->aliasMiddleware("app-management", AppManagement::class);
-        $this->app["router"]->aliasMiddleware("super-user", SuperUser::class);
-
-        // Policy
-        Gate::before(function (User $user, string $ability) {
-            if ($user->super) return true;
-        });
-        Gate::policy(User::class, config("user-management.userPolicy"));
-        Gate::policy(Role::class, config("user-management.rolePolicy"));
-        Gate::define("app-management", function (User $user) {
-            return PermissionActions::checkManagementAccess($user);
-        });
-        Gate::define("super-user", function (User $user) {
-            return ! empty($user->super);
-        });
-
-        // Наблюдатели
-        $userObserverClass = config("user-management.customUserObserver") ?? UserObserver::class;
-        User::observe($userObserverClass);
-
-        // Добавить политики в конфигурацию
-        $this->expandConfiguration();
-    }
-
     public function register(): void
     {
-        // Миграции.
         $this->loadMigrationsFrom(__DIR__ . "/database/migrations");
-
-        // Подключение конфигурации
-        $this->mergeConfigFrom(
-            __DIR__ . "/config/user-management.php", "user-management"
-        );
-
-        // Подключение routes
-        $this->loadRoutesFrom(__DIR__ . "/routes/admin.php");
-        $this->loadRoutesFrom(__DIR__ . "/routes/auth.php");
-        $this->loadRoutesFrom(__DIR__ . "/routes/api.php");
-
-        // Подключение переводов
+        $this->mergeConfigFrom(__DIR__ . "/config/user-management.php", "user-management");
         $this->loadJsonTranslationsFrom(__DIR__ . "/lang");
 
-        // Facades
-        $this->app->singleton("permission-actions", function () {
-            return new PermissionActionsManager;
-        });
-        $this->app->singleton("login-link-actions", function () {
-            return new LoginLinkActionsManager;
-        });
+        $this->initFacades();
 
-        // Commands.
         if ($this->app->runningInConsole()) {
             $this->commands([
                 CreatePermissionsCommand::class,
@@ -103,6 +40,24 @@ class UserManagementServiceProvider extends ServiceProvider
                 GenerateLoginLink::class,
             ]);
         }
+    }
+
+    public function boot(): void
+    {
+        $this->loadViewsFrom(__DIR__ . "/resources/views", "um");
+
+        $this->loadRoutesFrom(__DIR__ . "/routes/admin.php");
+        $this->loadRoutesFrom(__DIR__ . "/routes/auth.php");
+        $this->loadRoutesFrom(__DIR__ . "/routes/api.php");
+
+        $this->app["router"]->aliasMiddleware("app-management", AppManagement::class);
+        $this->app["router"]->aliasMiddleware("super-user", SuperUser::class);
+
+        $this->expandConfiguration();
+        $this->observeModels();
+        $this->setPolicies();
+
+        $this->addLivewireComponents();
     }
 
     private function expandConfiguration(): void
@@ -120,5 +75,52 @@ class UserManagementServiceProvider extends ServiceProvider
             "key" => $um["rolePolicyKey"]
         ];
         app()->config["user-management.permissions"] = $permissions;
+    }
+
+    protected function initFacades(): void
+    {
+        $this->app->singleton("permission-actions", function () {
+            return new PermissionActionsManager;
+        });
+        $this->app->singleton("login-link-actions", function () {
+            return new LoginLinkActionsManager;
+        });
+    }
+
+    protected function addLivewireComponents(): void
+    {
+        // Users
+        $component = config("user-management.customIndexComponent");
+        Livewire::component(
+            "um-users",
+            $component ?? UserIndexWire::class
+        );
+        // Roles
+        $component = config("user-management.customRoleIndexComponent");
+        Livewire::component(
+            "um-roles",
+            $component ?? RoleIndexWire::class
+        );
+    }
+
+    protected function setPolicies(): void
+    {
+        Gate::before(function (User $user, string $ability) {
+            if ($user->super) return true;
+        });
+        Gate::policy(User::class, config("user-management.userPolicy"));
+        Gate::policy(Role::class, config("user-management.rolePolicy"));
+        Gate::define("app-management", function (User $user) {
+            return PermissionActions::checkManagementAccess($user);
+        });
+        Gate::define("super-user", function (User $user) {
+            return ! empty($user->super);
+        });
+    }
+
+    protected function observeModels(): void
+    {
+        $userObserverClass = config("user-management.customUserObserver") ?? UserObserver::class;
+        User::observe($userObserverClass);
     }
 }
