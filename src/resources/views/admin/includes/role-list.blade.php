@@ -12,9 +12,7 @@
                     <x-tt::ico.edit />
                 </button>
                 <button type="button" class="btn btn-sm btn-danger px-btn-x-ico rounded-s-none"
-                        @can("delete", $item) @if ($item->id === Auth::id()) disabled @endif
-                        @else disabled
-                        @endcan
+                        @cannot("delete", $item) disabled @endcannot
                         wire:loading.attr="disabled"
                         wire:click="showDelete({{ $item->id }})">
                     <x-tt::ico.trash />
