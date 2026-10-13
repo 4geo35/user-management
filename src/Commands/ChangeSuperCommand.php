@@ -26,7 +26,7 @@ class ChangeSuperCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         if ($id = $this->option("id")) {
             if (! is_numeric($id)) {
@@ -43,7 +43,7 @@ class ChangeSuperCommand extends Command
 
     private function changeById(int $id): void
     {
-        $user = User::find($id);
+        $user = User::query()->find($id);
         $this->changeSuper($user);
     }
 
@@ -61,9 +61,6 @@ class ChangeSuperCommand extends Command
             $this->error("User not found");
             return;
         }
-        /**
-         * @var User $user
-         */
         $super = $user->super;
         $user->super = $super ? null : now();
         $user->save();

@@ -8,12 +8,12 @@ use GIS\UserManagement\Interfaces\PolicyPermissionInterface;
 
 class UserPolicy implements PolicyPermissionInterface
 {
-    const PERMISSION_KEY = "users";
-    const VIEW_ALL = 2;
-    const CREATE = 4;
-    const UPDATE = 8;
-    const DELETE = 16;
-    const LINK = 32;
+    const string PERMISSION_KEY = "users";
+    const int VIEW_ALL = 2;
+    const int CREATE = 4;
+    const int UPDATE = 8;
+    const int DELETE = 16;
+    const int LINK = 32;
 
     public static function getPermissions(): array
     {

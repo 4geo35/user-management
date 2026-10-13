@@ -5,6 +5,7 @@ namespace GIS\UserManagement\Livewire;
 use GIS\UserManagement\Facades\PermissionActions;
 use GIS\UserManagement\Models\Permission;
 use GIS\UserManagement\Models\Role;
+use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -48,7 +49,7 @@ class RoleIndexWire extends Component
         ];
     }
 
-    public function render()
+    public function render(): View
     {
         $query = Role::query()->select("id", "name", "title");
         $query->orderBy("title");
@@ -82,7 +83,7 @@ class RoleIndexWire extends Component
         // Валидация
         $this->validate();
 
-        Role::create([
+        Role::query()->create([
             "name" => $this->name,
             "title" => $this->title,
             "management" => $this->management ? now() : null,
@@ -231,7 +232,7 @@ class RoleIndexWire extends Component
         $this->reset(["name", "title", "roleId", "rolePermissions", "permissionId", "permissionTitle", "management"]);
     }
 
-    private function checkAuth(string $action, Role $role = null): bool
+    private function checkAuth(string $action, ?Role $role = null): bool
     {
         try {
             $this->authorize($action, $role ?? Role::class);
@@ -247,7 +248,7 @@ class RoleIndexWire extends Component
 
     private function findRole(): ?Role
     {
-        $role = Role::find($this->roleId);
+        $role = Role::query()->find($this->roleId);
         if (! $role) {
             session()->flash("error", __("Role not found"));
             $this->closeData();
@@ -259,7 +260,7 @@ class RoleIndexWire extends Component
 
     private function findPermission(): ?Permission
     {
-        $permission = Permission::find($this->permissionId);
+        $permission = Permission::query()->find($this->permissionId);
         if (! $permission) {
             session()->flash("error", __("Permission not found"));
             $this->closePermissions();

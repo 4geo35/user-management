@@ -40,7 +40,7 @@ class GenerateLoginLink extends Command
             $this->error("User not found");
             return;
         }
-        $link = LoginLink::create([
+        $link = LoginLink::query()->create([
             "email" => $email,
             "send" => $send
         ]);

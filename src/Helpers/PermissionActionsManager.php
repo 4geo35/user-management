@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class PermissionActionsManager
 {
-    const PERMISSION_KEY = "roleRule";
-    const ROLE_IDS = "user-role-ids";
-    const MANAGEMENT_ID = "user-management-role";
+    const string PERMISSION_KEY = "roleRule";
+    const string ROLE_IDS = "user-role-ids";
+    const string MANAGEMENT_ID = "user-management-role";
 
     public function checkManagementAccess(User $user): bool
     {

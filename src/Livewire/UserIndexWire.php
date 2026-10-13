@@ -162,7 +162,7 @@ class UserIndexWire extends Component
         // Валидация
         $this->validate();
         $newPassword = Str::random(8);
-        $user = User::create([
+        $user = User::query()->create([
             "name" => $this->name,
             "email" => $this->email,
             "password" => Hash::make($newPassword)
@@ -320,7 +320,7 @@ class UserIndexWire extends Component
         $check = $this->checkAuth("link", $user);
         if (! $check) return;
 
-        $link = LoginLink::create([
+        $link = LoginLink::query()->create([
             "email" => $user->email,
         ]);
         $url = route("auth.email-authenticate", ["token" => $link->id]);
@@ -336,7 +336,7 @@ class UserIndexWire extends Component
         $check = $this->checkAuth("link", $user);
         if (! $check) return;
 
-        LoginLink::create([
+        LoginLink::query()->create([
             "email" => $user->email,
             "send" => $user->email,
         ]);
@@ -358,7 +358,7 @@ class UserIndexWire extends Component
      */
     private function findUser(): ?User
     {
-        $user = User::find($this->userId);
+        $user = User::query()->find($this->userId);
         if (! $user) {
             session()->flash("error", __("User not found"));
             $this->closeData();
@@ -367,7 +367,7 @@ class UserIndexWire extends Component
         return $user;
     }
 
-    private function checkAuth(string $action, User $user = null): bool
+    private function checkAuth(string $action, ?User $user = null): bool
     {
         try {
             $this->authorize($action, $user ?? User::class);

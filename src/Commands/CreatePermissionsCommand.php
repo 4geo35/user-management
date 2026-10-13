@@ -43,7 +43,7 @@ class CreatePermissionsCommand extends Command
                 ->where("key", $key)
                 ->first();
             if (! $permission) {
-                $permission = Permission::create($data);
+                $permission = Permission::query()->create($data);
                 $this->info("Create permission {$data['title']} ({$data['key']})");
             } else {
                 /**
@@ -86,7 +86,7 @@ class CreatePermissionsCommand extends Command
                     $this->error("Role data not filled for role {$roleData['name']}");
                     continue;
                 }
-                $role = Role::create([
+                $role = Role::query()->create([
                     "name" => $roleData["name"],
                     "title" => $roleData["title"],
                     "management" => $roleData["management"] ? now() : null,

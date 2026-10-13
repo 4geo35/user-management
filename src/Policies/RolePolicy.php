@@ -9,11 +9,11 @@ use GIS\UserManagement\Models\Role;
 
 class RolePolicy implements PolicyPermissionInterface
 {
-    const PERMISSION_KEY = "roles";
-    const VIEW_ALL = 2;
-    const CREATE = 4;
-    const UPDATE = 8;
-    const DELETE = 16;
+    const string PERMISSION_KEY = "roles";
+    const int VIEW_ALL = 2;
+    const int CREATE = 4;
+    const int UPDATE = 8;
+    const int DELETE = 16;
 
     public static function getPermissions(): array
     {
